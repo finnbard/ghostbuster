@@ -1,7 +1,7 @@
 #!/bin/bash
 # author: Emanuel Söllinger
 # date: 2024-06-17
-# description: Einfaches Claim-System fuer Verzeichnisse mittels Logfile. (Kleines Extra: alle aktuellen claims stehen auch in einem zentralen file)
+# description: Einfaches Claim-System fuer Verzeichnisse mittels Lockfile. (Kleines Extra: alle aktuellen claims koennen ueber das zentrale ghostbusterboard file gefunden werden)
 # usage: . /pfad/zu/cwdunclaim.sh
 
 
@@ -11,24 +11,29 @@ targetDirectory=$(pwd) || {
 	return 1
 }
 
-# logFile und ghostbusterboard.txt dateipfad
-logFile="$targetDirectory/claim.log"
-boardFile="/ldata/archive/exchange/emanuelsoellinger/ghostbusterboard/ghostbusterboard.txt"
-
-currentUser=$(whoami)
+# lockFile und ghostbusterboard.txt dateipfad
+lockFile="$targetDirectory/claim.lock"
+boardFile="/ldata/archive/exchange/scripts_dev/ghostbuster/ghostbusterboard.txt"
 
 
+#variablen fuer farbige ausgabe
+start="\e["
+gruen="32m"
+fettgruen="\e[1;$gruen"
+reset="\e[0m"
 
-# ist ein logFile vorhanden dann ist das Directory geclaimt und kann unclaimed werden - i.e. logFile wird entfernt
-if [ ! -f "$logFile" ]; then
-	echo "Fehler: Kein Claim-Logfile gefunden ('$logFile'). Directory kann nicht unclaimed werden."
+
+
+# ist ein lockFile vorhanden dann ist das Directory geclaimt und kann unclaimed werden - i.e. lockFile wird entfernt
+if [ ! -f "$lockFile" ]; then
+	echo "Fehler: Kein Claim-Lockfile gefunden ('$lockFile'). Directory kann nicht unclaimed werden."
 	return 2
 fi
-rm "$logFile" || {
-    echo "Fehler: Konnte '$logFile' nicht entfernen."
+rm "$lockFile" || {
+    echo "Fehler: Konnte '$lockFile' nicht entfernen."
     return 3
 }
-echo "SUCCESS: $targetDirectory wurde erfolgreich unclaimed. Logfile wurde entfernt."
+printf "$fettgruen""SUCCESS: $targetDirectory wurde erfolgreich unclaimed. Lockfile wurde entfernt.""$reset\n"
 
 
 # extra: eintrag mit aktuellem verzeichnis aus dem ghostbusterboard loeschen
@@ -41,4 +46,4 @@ sed -i "\|Directory: $targetDirectory, User: .*, Status: Claimed at .*|d" "$boar
     echo "Hinweis: Konnte Eintrag in '$boardFile' nicht entfernen."
     return 5
 }
-echo "SUCCESS: Eintrag in '$boardFile' wurde erfolgreich entfernt."
+printf "$start$gruen""SUCCESS: Eintrag in '$boardFile' wurde erfolgreich entfernt.""$reset\n"
