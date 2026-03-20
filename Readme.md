@@ -4,8 +4,10 @@
 
 author: Emanuel Söllinger  
 date: 2024-06-17  
-description: Simples Claim-System fuer Verzeichnisse mittels Lockfile. (Kleines Extra: alle aktuellen claims koennen ueber das zentrale ghostbusterboard file gefunden werden)  
-usage: ${. /pfad/zu/cdclaim.sh /pfad/zum/verzeichnis} und ${. /pfad/zu/cwdunclaim.sh} -- /pfad/zum/verzeichnis soll so aussehen: /ldata/prod/Verarbeitungsordner
+description: Simples Claim-System fuer Verzeichnisse mittels Lockfile.  
+(Kleines Extra: alle aktuellen claims koennen ueber das zentrale ghostbusterboard file gefunden werden)  
+usage: ${. /pfad/zu/cdclaim.sh /pfad/zum/verzeichnis} und ${. /pfad/zu/cwdunclaim.sh}  
+-- /pfad/zum/verzeichnis soll so aussehen: /ldata/prod/Verarbeitungsordner
 
 alias cdclaim=". /ldata/archive/exchange/scripts_dev/ghostbuster/cdclaim.sh"  
 alias cwdunclaim=". /ldata/archive/exchange/scripts_dev/ghostbuster/cwdunclaim.sh"
