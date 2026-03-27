@@ -1,5 +1,5 @@
 #!/bin/bash
-# author: Emanuel Söllinger
+# author: Emanuel Soellinger
 # date: 2024-06-17
 # description: Einfaches Claim-System fuer Verzeichnisse mittels Lockfile. (Kleines Extra: alle aktuellen claims koennen ueber das zentrale ghostbusterboard file gefunden werden)
 # usage: . /pfad/zu/cwdunclaim.sh
@@ -13,7 +13,7 @@ targetDirectory=$(pwd) || {
 
 # lockFile und ghostbusterboard.txt dateipfad
 lockFile="$targetDirectory/claim.lock"
-boardFile="/ldata/archive/exchange/scripts_dev/ghostbuster/ghostbusterboard.txt"
+boardFile="/ldata/prod/common/bash/ghostbuster/ghostbusterboard.txt"
 
 
 #variablen fuer farbige ausgabe

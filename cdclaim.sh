@@ -1,5 +1,5 @@
 #!/bin/bash
-# author: Emanuel Söllinger
+# author: Emanuel Soellinger
 # date: 2024-06-17
 # description: Einfaches Claim-System fuer Verzeichnisse mittels Lockfile. (Kleines Extra: alle aktuellen claims koennen ueber das zentrale ghostbusterboard file gefunden werden)
 # usage: . /pfad/zu/cdclaim.sh /pfad/zum/verzeichnis
@@ -7,13 +7,12 @@
 # parameter
 targetDirectory=$1
 
-# startDirectory, lockFile und ghostbusterboard.txt dateipfad
+# startDirectory und ghostbusterboard.txt dateipfad
 startDirectory=$(pwd) || {
 	echo "Fehler: Konnte das aktuelle Verzeichnis nicht ermitteln."
 	return 1
 }
-lockFile="$targetDirectory/claim.lock"
-boardFile="/ldata/archive/exchange/scripts_dev/ghostbuster/ghostbusterboard.txt"
+boardFile="/ldata/prod/common/bash/ghostbuster/ghostbusterboard.txt"
 
 #variablen fuer farbige ausgabe
 rot="31m"
@@ -37,6 +36,8 @@ cd "$targetDirectory" || {
 
 # absoluten pfad nach cd verwenden, damit grep und lockfile konsistent sind
 currentDirectory=$(pwd)
+# lockfile pfad auch erst nach cd definieren, damit er dank absolutem pfad immer im zielverzeichnis liegt
+lockFile="$currentDirectory/claim.lock"
 # $SUDO_USER verwenden, damit auch bei ctmagent der t1user eingetragen wird
 currentUser="$SUDO_USER"
 
