@@ -1,6 +1,6 @@
 #!/bin/bash
 # author: Emanuel Soellinger
-# date: 2024-06-17
+# date: 2026-03-19
 # description: Einfaches Claim-System fuer Verzeichnisse mittels Lockfile. (Kleines Extra: alle aktuellen claims koennen ueber das zentrale ghostbusterboard file gefunden werden)
 # usage: . /pfad/zu/cdclaim.sh /pfad/zum/verzeichnis
 
