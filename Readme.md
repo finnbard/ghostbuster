@@ -4,10 +4,13 @@
 
 author: Emanuel Soellinger  
 date: 2026-03-19  
-description: Simples Claim-System fuer Verzeichnisse mittels Lockfile.  
+description: Simples System um Verzeichnisse mittels Lockfile zu claimen (== als "in Verwendung markieren).
+Dadurch soll verhindert werden, dass mehrere Entwickler gleichzeitig in einem Ordner arbeiten und sich dabei gegenseitig in die Quere kommen.
 (Kleines Extra: alle aktuellen claims koennen ueber das zentrale ghostbusterboard file gefunden werden)  
 usage: ${. /pfad/zu/cdclaim.sh /pfad/zum/verzeichnis} und ${. /pfad/zu/cwdunclaim.sh}  
--- /pfad/zum/verzeichnis soll so aussehen: /ldata/prod/Verarbeitungsordner
+-- Der cdclaim-Befehl ist von der Logik her wie cd zu verwenden d.h. Aufruf mit: cdclaim /relativer/oder/absoluter/Pfad/zum/Verarbeitungsordner -- cwdclaim wird ohne Parameter aufgerufen!  
+
+Einfachere Verwendung per Alias:  
 
 alias cdclaim=". /ldata/prod/common/bash/ghostbuster/cdclaim.sh"  
 alias cwdunclaim=". /ldata/prod/common/bash/ghostbuster/cwdunclaim.sh"
